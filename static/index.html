@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">	
+		
+		<style>
+body {
+	min-height: 100vh;
+}
+		</style>
+
+	</head>
+	<body>
+		<div style="height: 100vh" class="row">
+			<div style="height: 100vh" class="col s12">
+				<div id="video-container" style="height: 100vh" class="carousel carousel-slider"></div>
+			</div>
+		</div>
+
+			
+		<script type="text/javascript" src="./tiktok-api/tiktok-api.js"></script>
+		<script type="text/javascript" src="./templates.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script>
+		
+			var curr = null;
+			function playAweme(vid) {
+				if (curr != null) {
+					curr.pause()
+					curr.currentTime = 0
+				}
+
+				curr = vid
+				vid.play()
+			}
+
+			// $(document).ready(...)
+			document.addEventListener('DOMContentLoaded', function() {
+			
+				tiktok.getFeed()
+				.then(async feed => {
+					
+					for (i in feed.aweme_list) {
+						var url = feed.aweme_list[i].video.play_addr.url_list[0]
+
+						var tpl = await templates.parse('aweme.html', {
+							url: url
+						})
+
+						document.getElementById('video-container').innerHTML += tpl
+					}
+
+					var elems = document.querySelectorAll('.carousel');
+					var instances = M.Carousel.init(elems, {
+						numVisible: 3,
+						fullWidth: true,
+						onCycleTo: function(elem) {
+							playAweme(elem)
+						}
+					});
+				})
+
+			})
+		</script>
+	</body>
+</html>

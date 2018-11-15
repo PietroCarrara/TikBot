@@ -1,0 +1,3 @@
+[submodule "tiktok-api"]
+	path = tiktok-api
+	url = ./static/tiktok-api
