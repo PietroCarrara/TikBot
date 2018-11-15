@@ -5,16 +5,24 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">	
 		
 		<style>
-body {
-	min-height: 100vh;
-}
+			body {
+				min-height: 100vh;
+				overflow-y: hidden;
+			}
 		</style>
 
 	</head>
 	<body>
 		<div style="height: 100vh" class="row">
-			<div style="height: 100vh" class="col s12">
+			<div class="col s1 valign-wrapper" style="height: 100vh">
+
+				<a onclick="nextSlide(-1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_before</i></a>
+			</div>
+			<div style="height: 100vh" class="col s10">
 				<div id="video-container" style="height: 100vh" class="carousel carousel-slider"></div>
+			</div>
+			<div class="col s1 valign-wrapper" style="height: 100vh">
+				<a onclick="nextSlide(1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_next</i></a>
 			</div>
 		</div>
 
@@ -35,6 +43,12 @@ body {
 				vid.play()
 			}
 
+			function nextSlide(num) {
+				var car = M.Carousel.getInstance(document.getElementById('video-container'))
+
+				car.next(num)
+			}
+
 			// $(document).ready(...)
 			document.addEventListener('DOMContentLoaded', function() {
 			
@@ -52,8 +66,8 @@ body {
 					}
 
 					var elems = document.querySelectorAll('.carousel');
-					var instances = M.Carousel.init(elems, {
-						numVisible: 3,
+					M.Carousel.init(elems, {
+						duration: 100,
 						fullWidth: true,
 						onCycleTo: function(elem) {
 							playAweme(elem)
