@@ -9,32 +9,29 @@
 				min-height: 100vh;
 				overflow-y: hidden;
 			}
+
+			/* Center loading animations */
+			.preloader-wrapper {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
 		</style>
+
+		<script type="text/javascript" src="./tiktok-api/tiktok-api.js"></script>
+		<script type="text/javascript" src="./templates.js"></script>
+		<script type="text/javascript" src="./pages/pages.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 	</head>
 	<body>
-		<div style="height: 100vh" class="row">
-			<div class="col s1 valign-wrapper" style="height: 100vh">
-
-				<a onclick="nextSlide(-1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_before</i></a>
-			</div>
-			<div style="height: 100vh" class="col s10">
-				<div id="video-container" style="height: 100vh" class="carousel carousel-slider">
-					<div class="carousel-fixed-item center">
-						<a class="btn waves-effect white grey-text darken-text-2" id="author"></a>
-					</div>
-				</div>
-			</div>
-			<div class="col s1 valign-wrapper" style="height: 100vh">
-				<a onclick="nextSlide(1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_next</i></a>
-			</div>
+		<div style="height: 100vh" id="main-container" class="row">
 		</div>
 
-			
-		<script type="text/javascript" src="./tiktok-api/tiktok-api.js"></script>
-		<script type="text/javascript" src="./templates.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-		<script>
+		<script type="text/javascript">
 		
 			var curr = null;
 			function playAweme(vid) {
@@ -58,24 +55,9 @@
 			
 				tiktok.getFeed()
 				.then(async feed => {
-					
-					for (i in feed.aweme_list) {
-						var tpl = await templates.parse('aweme.html', {
-							aweme: feed.aweme_list[i]
-						})
-
-						document.getElementById('video-container').innerHTML += tpl
-					}
-
-					var elems = document.querySelectorAll('.carousel');
-					M.Carousel.init(elems, {
-						duration: 100,
-						fullWidth: true,
-						onCycleTo: function(elem) {
-							playAweme(elem)
-							document.getElementById('author').innerText = elem.dataset.desc
-						}
-					});
+					pages.navigate(templates.parse('aweme_list.html', {
+						aweme_list: feed.aweme_list
+					}))
 				})
 
 			})

@@ -9,7 +9,7 @@ templates.parse = function(tplName, args) {
 			eval(`var ${__i} = args[__i]`)
 		}
 
-		return eval('`' + tpl + '`')
+		// Return a async function, so await can be used within the templates
+		return eval('(async function(){return `' + tpl + '`})()')
 	})
-
 }
