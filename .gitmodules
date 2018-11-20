@@ -1,3 +1,3 @@
 [submodule "tiktok-api"]
 	path = tiktok-api
-	url = ./static/tiktok-api
+	url = https://github.com/PietroCarrara/TikTok-api.git
