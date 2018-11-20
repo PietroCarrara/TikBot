@@ -47,6 +47,17 @@
 			function nextSlide(num) {
 				var car = M.Carousel.getInstance(document.getElementById('video-container'))
 
+				console.log(car)
+				if (car.center >= car.count - 1) {
+					tiktok.getFeed()
+					.then(async feed => {
+						pages.navigate(templates.parse('aweme_list.html', {
+							aweme_list: feed.aweme_list
+						}))
+					})
+					return
+				}
+
 				car.next(num)
 			}
 

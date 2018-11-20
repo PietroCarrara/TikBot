@@ -24,11 +24,8 @@ pages.navigate = function(html) {
 	// Make the main page a loagin animation,
 	// and then show it
 	if (html instanceof Promise) {
-		
 		cont.innerHTML = loading
-
 		html.then(res => this.navigate(res))
-
 		return
 	}
 

@@ -30,6 +30,7 @@
 	var elems = document.querySelectorAll('.carousel');
 	M.Carousel.init(elems, {
 		duration: 100,
+		noWrap: true,
 		fullWidth: true,
 		onCycleTo: function(elem) {
 			playAweme(elem)
