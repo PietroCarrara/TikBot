@@ -19,7 +19,11 @@
 				<a onclick="nextSlide(-1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_before</i></a>
 			</div>
 			<div style="height: 100vh" class="col s10">
-				<div id="video-container" style="height: 100vh" class="carousel carousel-slider"></div>
+				<div id="video-container" style="height: 100vh" class="carousel carousel-slider">
+					<div class="carousel-fixed-item center">
+						<a class="btn waves-effect white grey-text darken-text-2" id="author"></a>
+					</div>
+				</div>
 			</div>
 			<div class="col s1 valign-wrapper" style="height: 100vh">
 				<a onclick="nextSlide(1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_next</i></a>
@@ -69,6 +73,7 @@
 						fullWidth: true,
 						onCycleTo: function(elem) {
 							playAweme(elem)
+							document.getElementById('author').innerText = elem.dataset.desc
 						}
 					});
 				})
