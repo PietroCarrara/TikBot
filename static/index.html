@@ -56,10 +56,8 @@
 				.then(async feed => {
 					
 					for (i in feed.aweme_list) {
-						var url = feed.aweme_list[i].video.play_addr.url_list[0]
-
 						var tpl = await templates.parse('aweme.html', {
-							url: url
+							aweme: feed.aweme_list[i]
 						})
 
 						document.getElementById('video-container').innerHTML += tpl

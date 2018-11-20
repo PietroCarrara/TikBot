@@ -10,6 +10,8 @@ import (
 
 func main() {
 	address, _ := url.Parse("http://api2.musical.ly/")
+
+	// Proxy allowing CORS requests
 	proxy := httputil.NewSingleHostReverseProxy(address)
 
 	proxy.Director = func(r *http.Request) {
