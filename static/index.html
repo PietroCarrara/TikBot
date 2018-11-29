@@ -66,10 +66,12 @@
 			// $(document).ready(...)
 			document.addEventListener('DOMContentLoaded', function() {
 
-				router.init()
-			
-				router.user('6621967278139523078')
-
+				// Default page
+				if (window.location.hash == '') {
+					router.goto('userFavs/6621967278139523078')
+				} else {
+					router.init()
+				}
 			})
 		</script>
 	</body>

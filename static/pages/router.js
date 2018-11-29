@@ -1,33 +1,48 @@
 var router = {}
 
+// The current "url"
+router.current = ''
+
 router.init = function() {
 
+	// Transform links
 	var links = document.getElementsByTagName('a')
-
 	for(var i in links) {
-
 		var l = links[i].href
-
 		if (typeof l == 'undefined') {
 			continue
 		}
+		links[i].href = router.link(l)
+	}
 
-		l = l.replace(window.location.href, '')
+	var url = window.location.hash.replace('#', '')
 
-		links[i].href = 'javascript:router.goto("' + l + '")'
+	if (url != router.current) {
+		router.current = url
+		router.goto(url)
 	}
 
 }
 
-router.goto = function (url) {
+router.goto = function (uri) {
 	
-	if (url == '') {
+	if (uri == '') {
 		return
 	}
-	
+
+	router.current = uri;
+	window.location.hash = uri;
+
 	// Get route and args
-	[url, ...args] = url.split('/')
+	[url, ...args] = uri.split('/')
 
 	// Callback
 	router[url](...args)
+
+}
+
+router.link = function(url) {
+	var l = url.replace(window.location.href, '')
+	
+	return 'javascript:router.goto("' + l + '")'
 }

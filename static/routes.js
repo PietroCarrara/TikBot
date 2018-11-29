@@ -1,6 +1,4 @@
-router.user = function(userID) {
-
-	console.log(userID)
+router.userFavs = function(userID) {
 
 	tiktok.getUserFavs(userID)
 	.then(async feed => {
