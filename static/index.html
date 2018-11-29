@@ -45,11 +45,12 @@
 			}
 
 			function nextSlide(num) {
+
 				var car = M.Carousel.getInstance(document.getElementById('video-container'))
 
 				console.log(car)
-				if (car.center >= car.count - 1) {
-					tiktok.getFeed()
+				if (car.center >= car.count - 1 && tiktok.next) {
+					tiktok.next()
 					.then(async feed => {
 						pages.navigate(templates.parse('aweme_list.html', {
 							aweme_list: feed.aweme_list
@@ -64,7 +65,7 @@
 			// $(document).ready(...)
 			document.addEventListener('DOMContentLoaded', function() {
 			
-				tiktok.getFeed()
+				tiktok.getUserFavs('6621967278139523078')
 				.then(async feed => {
 					pages.navigate(templates.parse('aweme_list.html', {
 						aweme_list: feed.aweme_list
