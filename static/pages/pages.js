@@ -31,6 +31,8 @@ pages.navigate = function(html) {
 
 	cont.innerHTML = html
 
+	// Transform links
+	router.init()
 
 	// Eval scripts on the page, since setting the innerHTML does not run them
 	// This causes every script to be run AFTER it has been inserted, confusing some

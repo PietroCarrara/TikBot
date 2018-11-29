@@ -24,6 +24,8 @@
 		<script type="text/javascript" src="./tiktok-api/tiktok-api.js"></script>
 		<script type="text/javascript" src="./templates.js"></script>
 		<script type="text/javascript" src="./pages/pages.js"></script>
+		<script type="text/javascript" src="./pages/router.js"></script>
+		<script type="text/javascript" src="./routes.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 	</head>
@@ -48,7 +50,6 @@
 
 				var car = M.Carousel.getInstance(document.getElementById('video-container'))
 
-				console.log(car)
 				if (car.center >= car.count - 1 && tiktok.next) {
 					tiktok.next()
 					.then(async feed => {
@@ -64,13 +65,10 @@
 
 			// $(document).ready(...)
 			document.addEventListener('DOMContentLoaded', function() {
+
+				router.init()
 			
-				tiktok.getUserFavs('6621967278139523078')
-				.then(async feed => {
-					pages.navigate(templates.parse('aweme_list.html', {
-						aweme_list: feed.aweme_list
-					}))
-				})
+				router.user('6621967278139523078')
 
 			})
 		</script>

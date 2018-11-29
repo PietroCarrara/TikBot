@@ -1,1 +1,6 @@
-	<video src="${aweme.video.play_addr.url_list}" class="carousel-item" class="responsive-video" data-desc="${aweme.desc}" loop="true"></video>
+<video src="${aweme.video.play_addr.url_list}" class="carousel-item" class="responsive-video"
+	data-desc="`+ aweme.desc.replace('"', '&quot;') +`"
+	data-author-nick="` + aweme.author.nickname + `"
+	data-author-id="` + aweme.author_user_id + `"
+	data-author-pic="` + aweme.author.avatar_thumb.url_list[0] + `"
+loop="true"></video>

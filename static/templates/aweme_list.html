@@ -1,11 +1,24 @@
 <div class="col s1 valign-wrapper" style="height: 100vh">
-	<a onclick="nextSlide(-1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_before</i></a>
+	<a onclick="nextSlide(-1)" class="btn-floating btn-large waves-effect waves-light pink"><i class="material-icons">navigate_before</i></a>
 </div>
 
 <div style="height: 100vh" class="col s10">
 	<div id="video-container" style="height: 100vh" class="carousel carousel-slider">
 		<div class="carousel-fixed-item center">
-			<a class="btn waves-effect white grey-text darken-text-2" id="author"></a>
+			<div class="row" >
+				<div class="col s3">
+					<div class="row">
+						<img class="responsive-img circle" id="aweme-author-pic">
+						<div class="row" id="aweme-desc-container">
+							<div class="col s12">
+								<div class="card-panel pink">
+									<span class="white-text" id="aweme-desc"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		`+
 		await (async function() {
@@ -23,7 +36,7 @@
 </div>
 
 <div class="col s1 valign-wrapper" style="height: 100vh">
-	<a onclick="nextSlide(1)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">navigate_next</i></a>
+	<a onclick="nextSlide(1)" class="btn-floating btn-large waves-effect waves-light pink"><i class="material-icons">navigate_next</i></a>
 </div>
 
 <script type="text/javascript">
@@ -34,7 +47,18 @@
 		fullWidth: true,
 		onCycleTo: function(elem) {
 			playAweme(elem)
-			document.getElementById('author').innerText = elem.dataset.desc
+			var desc = document.getElementById('aweme-desc')
+			var pic = document.getElementById('aweme-author-pic')
+				
+			desc.innerText = elem.dataset.desc
+			var descContainer = document.getElementById('aweme-desc-container')
+			if (elem.dataset.desc.length <= 0) {
+				descContainer.style.display = 'none'
+			} else {
+				descContainer.style.display = 'inline'
+			}
+
+			pic.src = elem.dataset.authorPic
 		}
 	});
 </script>
